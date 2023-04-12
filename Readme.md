@@ -37,6 +37,12 @@ build/CmakeDebugTarget.exe
 ```
 cdb -p processId
 ```
+processId needs to be a hex number starts with 0x
+
+[Parameter to avoid debugger search for symbol in system lib](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/avoiding-debugger-searches-for-unneeded-symbols)
+```
+-snul
+```
 
 ### Stop debugging
 ```
@@ -57,6 +63,7 @@ exit
 | `.srcpath+ DIR`   | Add source search path        ||
 | `lm`   | list module        ||
 | `x /D /f CmakeDebugTarget!`   | List functions in module        |Filter functions which name starts with 'a' in module by regex: `x /D /f CmakeDebugTarget!a*`|
+| `x CmakeDebugTarget!p`   | Show address of variable p        |[more info about x command](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/x--examine-symbols-)|
 | `bp CmakeDebugTarget!main`   | set breakpoint at function        ||
 | `bp 00007ff6151c16a4`   | set breakpoint at address        |adress can be splited like 00007ff7`9b7a3550|
 | `bc 1`   | clear breakpoint        |The 1 is index of the breakpoint|
@@ -65,6 +72,8 @@ exit
 | `dyb 00007ff6151c16a4`   | dump memory at address        ||
 | `u 00007ff6151c16a4`   | dump disassemble at address        |`u address L8` Disassemble from address with size 8|
 | `r`   | Show registers        ||
+|`sx <i ignore | d disable> <exception code>`|Ignore first chance exception||
+||-g disable the break on process creationand -G disables the break on process exit.||
 
 #### Reference
 https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/debugging-using-cdb-and-ntsd
