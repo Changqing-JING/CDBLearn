@@ -44,19 +44,13 @@ processId needs to be a hex number starts with 0x
 -snul
 ```
 
-### Stop debugging
-```
-.detach
-```
-### Exit cdg
-```
-exit
-```
 ## Often used cdb commands
 
 | Command      | Description |Comment
 | ----------- | ----------- |----------- |
 | `.attach pid`      | Attach to process       |Pid must be hex number|
+| `.detach`      | detach of process       ||
+| `quit`      | quit debugger       ||
 | `.sympath`   | List debug symbol search path        ||
 | `.sympath+ DIR`   | Add debug symbol search path        ||
 | `.srcpath`   | List source search path        ||
