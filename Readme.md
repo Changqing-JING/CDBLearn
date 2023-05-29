@@ -27,13 +27,18 @@ Note: Replace x64 with arm64 on arm64 host
 
 # Start Debug
 
-##
+## Launch a exe file with cdb
+```
+cdb -c "g" -y <path to pdb file> <exe file name>
+```
+
+## Attach mode
 Launch the debug target
 ```
 build/CmakeDebugTarget.exe
 ```
 
-## Launch cdb and attach to a process
+### Launch cdb and attach to a process
 ```
 cdb -p processId
 ```
@@ -58,7 +63,7 @@ processId needs to be a hex number starts with 0x
 | `lm`   | list module        ||
 | `x /D /f CmakeDebugTarget!`   | List functions in module        |Filter functions which name starts with 'a' in module by regex: `x /D /f CmakeDebugTarget!a*`|
 | `x CmakeDebugTarget!p`   | Show address of variable p        |[more info about x command](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/x--examine-symbols-)|
-| `bp CmakeDebugTarget!main`   | set breakpoint at function        ||
+| `bp CmakeDebugTarget!main+x`   | set breakpoint at function main line x       ||
 | `bp 00007ff6151c16a4`   | set breakpoint at address        |adress can be splited like 00007ff7`9b7a3550|
 | `bc 1`   | clear breakpoint        |The 1 is index of the breakpoint|
 | `g`   | Continue execution        ||
@@ -67,6 +72,8 @@ processId needs to be a hex number starts with 0x
 | `u 00007ff6151c16a4`   | dump disassemble at address        |`u address L8` Disassemble from address with size 8|
 | `r`   | Show registers        ||
 |`sx <i ignore | d disable> <exception code>`|Ignore first chance exception||
+|`ba <access type><size> <memory address> `|set data break point|example `ba w4 00401000`.
+<access type> is the type of access you want to monitor, such as "r" for read access or "w" for write access. |
 ||-g disable the break on process creationand -G disables the break on process exit.||
 
 #### Reference
